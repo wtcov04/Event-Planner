@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>
+        <%=shopName%>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">
+                <%=shopName%>
+            </a>
+        </h1>
+        <% if(!user) { %>
+            <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+                    href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a>
+            </p>
+
+            <% } else { %>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+                <% } %>
+    </nav>
+    <main>
+        <div class="det">
+            <h1>
+                title : <%= post.title %>
+            </h1>
+            <div class="item-container">
+                <div class="item-wrap">
+                    <div class="item title">
+                        <%= post.description %>
+                    </div>
+
+                    Event Holder : <%= post.user_name %>
+
+                        <div class="">
+                            Place : <%= post.place %>
+                        </div>
+                        <div class="">
+                            Held At : <%= post.held_at %>
+                        </div>
+
+
+                        search : <%= post.view_count+1 %>
+
+                </div>
+            </div>
+            <div style="margin: 10px;">
+                event participant
+            </div>
+            <div class="mb">
+                <%= partList.length %> / <%= post.limit_participant %>
+            </div>
+            <% if(partList.length==post.limit_participant ){ %>
+                <div class="mb"> The event is full of people</div>
+                <% } %>
+                    <div id="part-li" class="mb">
+                        <% partList.forEach(name=> { %>
+                            <div style="border: 1px solid green; width: 15%; display: inline-block;">
+                                <%= name %>
+                            </div>
+                            <% }); %>
+                    </div>
+                    <% if(!isPart && (partList.length < post.limit_participant ) ) { %>
+                        <form style="margin:10px" action="/participant/<%= post.event_id %>" method="post">
+                            <input style="margin: 10px;" type="hidden" name="username" value="<%= user.user_name %>"
+                                display="none">
+                            <br>
+                            <button type="submit" class="part">apply event</button>
+                        </form>
+                        <% } %>
+                            <% if(isPart ) { %>
+                                <h3 class="mb">already registered event</h3>
+                                <% } %>
+                                    <!-- if not your post and already registered-->
+                                    <% if(isPart && user.user_name!=post.user_name) { %>
+                                        <form action="/apply/delete/<%=post.event_id %>" method="post">
+                                            <input type="hidden" id="username" name="username"
+                                                value="<%= user.user_name %>">
+                                            <button type="submit" class="mb">Cancel Apply</button>
+                                        </form>
+                                        <% } %>
+                                            <% if(user.user_name==post.user_name) { %>
+
+                                                <div style="margin: 15px; display: flex; justify-content: center;">
+
+                                                    <a href="/post/update/<%= post.event_id %>"> <button
+                                                            style="padding: 10px; margin: 10px; background-color: aquamarine;">edit</button></a>
+                                                    <form action="/post/delete/<%= post.event_id %>" method="post">
+                                                        <button type="submit"
+                                                            style="padding: 10px; margin: 10px; background-color: aquamarine;">delete</button>
+                                                    </form>
+
+
+                                                </div>
+
+                                                <% } %>
+        </div>
+        <a href="/post"><button style="margin-top: 20px; padding: 10px;">list</button></a>
+    </main>
+</body>
+
+
+</html>

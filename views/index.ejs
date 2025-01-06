@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Welcome to <%=shopName%>
+  </title>
+  <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+  <nav>
+    <h1><a href="/">
+        <%=shopName%>
+      </a>
+    </h1>
+    <% if(!user) { %>
+      <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+          href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a></p>
+
+      <% } else { %>
+        <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+        <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+        <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+        <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+        <% } %>
+
+  </nav>
+  <main>
+    <h1>Home</h1>
+    <div id="img-container">
+      <div id="home-text">This place is a place where<br>
+        people gather together
+        A community that<br>
+        creates and participates in events such as gatherings.<br>
+        <div id="home-text2">Let's participate events together</div>
+      </div>
+      <img src="/home.png">
+    </div>
+  </main>
+</body>
+<script>
+  window.onload = () => {
+    if (new URL(location.href).searchParams.get('loginError')) {
+      alert(new URL(location.href).searchParams.get('loginError'));
+      window.location.href = "https://doc.gold.ac.uk/usr/465/login";
+    }
+  };
+</script>
+
+</html>

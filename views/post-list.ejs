@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>
+        <%=shopName%>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">
+                <%=shopName%>
+            </a>
+        </h1>
+        <% if(!user) { %>
+            <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+                    href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a>
+            </p>
+
+            <% } else { %>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+                <% } %>
+    </nav>
+    <main>
+        <h1>EVENT LIST</h1>
+        <div>
+            <a href="https://doc.gold.ac.uk/usr/465/post"><button>Latest Registration Order</button></a>
+            <a href="https://doc.gold.ac.uk/usr/465/post?sort=held_at"><button>Event Date Order</button></a>
+            <a href="https://doc.gold.ac.uk/usr/465/post?sort=view_count"><button>Number of views</button></a>
+        </div>
+        <div class="item-container">
+            <% posts.forEach(post=> { %>
+                <a href="https://doc.gold.ac.uk/usr/465/post/<%= post.event_id %>" class="item-wrap">
+                    <div class="item title">
+                        <%= post.title %>
+                    </div>
+                    <div class="bottom-item">
+                        <div class="item creator">
+                            <%= post.user_name %>
+                        </div>
+                        <div class="">
+                            <%= post.place %>
+                        </div>
+                        <div class="">
+                            <%= post.held_at %>
+                        </div>
+                        <!-- <div class="">
+                            <%= formatFunc(post.created_at) %>
+                        </div> -->
+                        <div class="">
+                            views <%= post.view_count %>
+                        </div>
+                    </div>
+                </a>
+
+                <% }); %>
+        </div>
+    </main>
+
+</body>
+
+
+</html>

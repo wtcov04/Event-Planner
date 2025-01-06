@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to <%=shopName%>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">
+                <%=shopName%>
+            </a>
+        </h1>
+        <% if(!user) { %>
+            <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+                    href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a>
+            </p>
+
+            <% } else { %>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+                <% } %>
+    </nav>
+    <main>
+        <h1>UPDATE EVENT</h1>
+        <div id="event-flex">
+            <form class="add-form" action="/post/update/<%=event.event_id %>" method="post">
+                <div class="form-l">
+                    <div><label for="username">Username :</label></div>
+                    <div><label for="place">Place :</label></div>
+                    <div><label for="held_at">Held At :</label></div>
+                    <div><label for="limit_participant">Limit Participant :</label></div>
+                    <div><label for="title">Title :</label></div>
+                    <div><label for="description">Description :</label></div>
+                </div>
+                <div class="form-r">
+                    <input type="text" id="username" name="username" value=<%=user.user_name %> readonly><br>
+                    <!-- cannot change limit of participant -->
+                    <input type="string" id="place" name="place" value="<%=event.place %>" required><br>
+                    <input type="date" id="held_at" name="held_at" value="<%=event.held_at %>" required><br>
+                    <input type="text" id="limit_participant" name="limit_participant"
+                        value="<%=event.limit_participant %>" required readonly><br>
+                    <input type="text" id="title" name="title" value="<%=event.title %>" required><br>
+                    <textarea id="description" name="description" rows="4"
+                        required><%=event.description %></textarea><br>
+                    <!-- list of current participant and delete participant  -->
+                    <button type="submit">Update Event</button>
+                </div>
+
+            </form>
+            <div>
+                <div class="mb">
+                    <div>Holder</div>
+                    <div style="color: green; font-weight: 700;">
+                        <%= event.user_name %>
+                    </div>
+                </div>
+                <div class="mb">
+                    <div>Participant</div>
+                    <% if(partList.length==1) { %>
+                        <div class="mb" style="color: red;">There are no participants yet</div>
+                        <% } %>
+                            <% partList.forEach(name=> { if(name!=event.user_name) {%>
+                                <div style="border: 1px solid green; display: block;">
+                                    <%= name %>
+                                </div>
+                                <% }}); %>
+                                    <div>Enter participant name to delete</div>
+                                    <form action="/participant/delete/<%=event.event_id %>" method="post">
+                                        <input type="text" id="username" name="username">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+    function initAutocomplete() {
+        var input = document.getElementById('place');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            console.log(place.name); 
+            });
+        }
+        window.onload = () => {
+            if (new URL(location.href).searchParams.get('error')) {
+                alert(new URL(location.href).searchParams.get('error'))
+            }
+        };
+        window.onload = function() {
+            initAutocomplete(); 
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJICC6DwxwkvWaoRzhEe5_2HVXhji9UM4&libraries=places"></script>
+</body>
+
+</html>

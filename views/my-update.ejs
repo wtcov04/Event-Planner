@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Welcome to <%=shopName%>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">
+                <%=shopName%>
+            </a>
+        </h1>
+        <% if(!user) { %>
+            <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+                    href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a>
+            </p>
+
+            <% } else { %>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+                <% } %>
+
+    </nav>
+    <main>
+        <h3>profile</h3>
+
+        <form action="/my/update" method="post">
+            <div>
+                ID : <input type="text" value="<%= user.user_name%>" name="username" readonly>
+            </div>
+
+            <h3>bio.</h3>
+            <div>
+                <textarea style="width: 300px; height: 120px;" type="text"
+                    name="introduce"><%= user.introduce%></textarea>
+            </div>
+            <input type="submit" value="UPDATE">
+        </form>
+
+    </main>
+</body>
+<script>
+</script>
+
+</html>

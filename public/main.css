@@ -1,0 +1,169 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  color: rgb(40, 155, 42);
+}
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: cadetblue;
+}
+
+p,
+li {
+  font-family: Arial, Helvetica, sans-serif;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+/* mouse over link */
+a:hover {
+  color: rgb(40, 155, 42);
+  text-decoration: none;
+  /* padding: 5px; */
+}
+
+h1 > a {
+  color: rgb(40, 155, 42);
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-weight: bold;
+  /* background-color: rgb(158, 218, 238); */
+}
+
+main {
+  text-align: center;
+  height: 80vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+#img-container {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5vw;
+}
+#img-container > img {
+  width: 400px;
+  height: 400px;
+}
+
+#home-text {
+  font-size: 30px;
+  color: rgb(40, 155, 42);
+  font-weight: bold;
+}
+
+#home-text2 {
+  font-size: 16px;
+  margin-top: 2vh;
+  color: rgb(141, 141, 195);
+}
+
+.item-container {
+  width: 100%;
+}
+.det {
+  border-radius: 20px;
+  border: 1px solid rgb(192, 236, 193);
+}
+.item-wrap {
+  /* width: calc(50% - 20px); */
+  display: block;
+  margin: 10px;
+  box-sizing: border-box;
+
+  border-radius: 20px;
+  border: 1px solid rgb(192, 236, 193);
+  background-color: rgb(192, 236, 193);
+  padding: 10px;
+  text-align: left;
+  padding-left: 30px;
+  /* display: flex; */
+  gap: 10px;
+  /* height: 12vh; */
+}
+.item-wrap .title {
+  font-size: 24px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.det {
+  border-radius: 20px;
+  border: 1px solid rgb(192, 236, 193);
+}
+.bottom-item {
+  color: darkgray;
+  gap: 20px;
+  display: flex;
+  font-size: 16px;
+}
+.part {
+  width: 180px;
+  height: 50px;
+  border-radius: 15px;
+  border: 1px solid rgb(192, 236, 193);
+  background-color: rgb(192, 236, 193);
+}
+
+.title {
+  font-weight: bold;
+}
+.edit-btn {
+  margin: 15px;
+  padding: 10px 20px 10px 20px;
+  background-color: rgb(192, 236, 193);
+  border: 1px dotted black;
+}
+button:hover {
+  box-shadow: 1px 1px 1px 1px #555555;
+}
+
+.add-form {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid rgb(192, 236, 193);
+  background-color: rgb(192, 236, 193);
+  border-radius: 30px;
+  font-size: 20px;
+  width: 750px;
+  height: 400px;
+  display: flex;
+}
+#event-flex {
+  display: flex;
+  justify-content: space-around;
+}
+.form-l {
+  flex: 3;
+}
+.form-r {
+  flex: 7;
+}
+.form-l > div {
+  margin-bottom: 20px;
+}
+.form-r > input {
+  margin-bottom: 20px;
+}
+
+.form-r > textarea {
+  margin-bottom: 20px;
+  width: 300px;
+  height: 100px;
+}
+.mb {
+  margin-bottom: 10px;
+}

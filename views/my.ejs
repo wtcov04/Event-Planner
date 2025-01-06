@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Welcome to <%=shopName%>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">
+                <%=shopName%>
+            </a>
+        </h1>
+        <% if(!user) { %>
+            <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+                    href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a>
+            </p>
+
+            <% } else { %>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+                <% } %>
+
+    </nav>
+    <main>
+        <h3>profile</h3>
+        <div>
+            ID : <%= user.user_name%>
+        </div>
+        <div>
+            bio : <%= user.introduce%>
+        </div>
+        <a href="/my/update"><button class="edit-btn">edit my profile</button></a>
+        <h3>my event</h3>
+        <div class="item-container">
+            <% myEvent.forEach(post=> { %>
+                <a href="https://doc.gold.ac.uk/usr/465/post/<%= post.event_id %>" class="item-wrap">
+                    <div class="item title">
+                        <%= post.title %>
+                    </div>
+                    <div class="bottom-item">
+                        <div class="item creator">
+                            <%= post.user_name %>
+                        </div>
+                        <div class="">
+                            <%= formatFunc(post.created_at) %>
+                        </div>
+                        <div class="">
+                            search <%= post.view_count %>
+                        </div>
+                    </div>
+                </a>
+
+                <% }); %>
+        </div>
+
+    </main>
+</body>
+<script>
+</script>
+
+</html>

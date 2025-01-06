@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>REGISTER
+    </title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">
+                <%=shopName%>
+            </a>
+        </h1>
+        <% if(!user) { %>
+            <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+                    href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a>
+            </p>
+
+            <% } else { %>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+                <% } %>
+    </nav>
+    <main>
+        <h1>REGISTER</h1>
+        <form action="https://doc.gold.ac.uk/usr/465/register" method="post">
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <h3>input birth date as YYMMDD.</h3>
+            <input type="text" name="password_sentence" placeholder="password_sentence">
+            <h3>write bio.</h3>
+            <div>
+                <textarea style="width: 300px; height: 120px;" type="text" name="introduce"
+                    placeholder="introduce"></textarea>
+            </div>
+            <input type="submit" value="REGISTER">
+        </form>
+        <div style="margin-top: 20px;">if you have id? <a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a>
+        </div>
+    </main>
+</body>
+<script>
+    window.onload = () => {
+        if (new URL(location.href).searchParams.get('error')) {
+            alert('already existed id')
+        }
+    };
+</script>
+
+</html>

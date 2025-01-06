@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>LOGIN
+    </title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">
+                <%=shopName%>
+            </a>
+        </h1>
+        <% if(!user) { %>
+            <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+                    href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a>
+            </p>
+
+            <% } else { %>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+                <% } %>
+    </nav>
+    <main>
+        <h1>LOGIN</h1>
+        <form action="https://doc.gold.ac.uk/usr/465/login" method="post">
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <input type="submit" value="login">
+        </form>
+        <a href="https://doc.gold.ac.uk/usr/465/forgot-password">forgot password?</a>
+        <a href="https://doc.gold.ac.uk/usr/465/register">register</a>
+    </main>
+    <script>
+        window.onload = () => {
+            if (new URL(location.href).searchParams.get('error')) {
+                alert(new URL(location.href).searchParams.get('error'))
+            }
+        };
+    </script>
+</body>
+
+</html>

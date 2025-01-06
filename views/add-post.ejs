@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to <%=shopName%>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+    <nav>
+        <h1><a href="/">
+                <%=shopName%>
+            </a>
+        </h1>
+        <% if(!user) { %>
+            <p><a href="https://doc.gold.ac.uk/usr/465/login">LOGIN</a> / <a
+                    href="https://doc.gold.ac.uk/usr/465/register">REGISTER</a>
+            </p>
+
+            <% } else { %>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post">EVENT LIST</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/post/add">ADD EVENT</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/my">ME</a></p>
+                <p><a href="https://doc.gold.ac.uk/usr/465/logout">LOGOUT</a></p>
+                <% } %>
+    </nav>
+    <main>
+        <h1>Add EVENT</h1>
+        <form class="add-form" action="/post/add" method="post">
+            <div class="form-l">
+                <div><label for="username">Username :</label></div>
+                <div><label for="place">Place :</label></div>
+                <div><label for="held_at">Held At :</label></div>
+                <div><label for="limit_participant">Limit Participant :</label></div>
+                <div><label for="title">Title :</label></div>
+                <div><label for="description">Description :</label></div>
+            </div>
+            <div class="form-r">
+                <input type="text" id="username" name="username" value=<%=user.user_name %> readonly><br>
+                <input type="string" id="place" name="place" required><br>
+                <input type="date" id="held_at" name="held_at" required><br>
+                <input type="number" id="limit_participant" name="limit_participant" required><br>
+                <input type="text" id="title" name="title" required><br>
+                <textarea id="description" name="description" rows="4" required></textarea><br>
+                <button type="submit">Create Event</button>
+            </div>
+        </form>
+    </main>
+    <script>
+        function initAutocomplete() {
+            var input = document.getElementById('place');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', function() {
+                var place = autocomplete.getPlace();
+                console.log(place.name); 
+            });
+        }
+        window.onload = function() {
+            initAutocomplete(); 
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJICC6DwxwkvWaoRzhEe5_2HVXhji9UM4&libraries=places"></script>
+</body>
+
+</html>
